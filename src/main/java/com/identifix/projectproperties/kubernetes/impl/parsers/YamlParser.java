@@ -16,6 +16,7 @@ public class YamlParser implements IYamlParser {
 
     public <T> T read(Class<T> clazz, String yaml) throws IOException {
         try {
+            yaml = yaml.replaceAll("\\{", "\"{").replaceAll("}", "}\"");
             return mapper.readValue(yaml, clazz);
         } catch (MismatchedInputException ex) {
             log.error(ex.getMessage());
